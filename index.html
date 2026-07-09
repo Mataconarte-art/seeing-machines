@@ -103,6 +103,7 @@
     <span>MA Design for Digital Futures · TH Nürnberg</span>
     <span>CompSci for Designers 2 · Summer 2026</span>
     <span><b>Stages:</b> L1 The Finder → L2 The Companion → L3 The Critic</span>
+    <span><b>Repository:</b> <a href="https://github.com/Mataconarte-art/seeing-machines">github.com/Mataconarte-art/seeing-machines</a></span>
   </div>
 </div></header>
 
@@ -343,6 +344,14 @@
       <code>subject_age_band</code> for every image, giving age its own clean retrieval signal
       (age is read from filename years, so unlike the semantic fields it is not self-referential).</figcaption>
     </figure>
+    <div class="callout" id="l2-age">
+      <b>Caveat on the age signal — dates are digitisation dates, not capture dates.</b> Because the
+      age band is read from the year in each filename, it is only as truthful as that year. Many of
+      these files record when a print was <em>scanned</em> or a file <em>exported</em>, not when the
+      photograph was taken — so a childhood print digitised in 2016 can carry a misleadingly recent
+      year. The age bands here (and every age-based query in L3) should therefore be read as
+      <em>approximate</em>. A faithful correction is to date each image by eye rather than by filename.
+    </div>
   </section>
 
   <section>
@@ -555,6 +564,25 @@
       where both routes fail (rare or fine-grained concepts). A weighted average can combine two partial
       signals; it cannot invent a signal that isn't there.
     </div>
+    <div class="callout" id="l3-gold">
+      <b>Caveat on the gold labels — filenames don't describe content.</b> The relevance lists in
+      <code>gold_queries.json</code> were auto-derived from filenames and caption fields, and a file's
+      name reflects how it was saved, not what it shows. For example
+      <code>2016_11_Project Sculture_2_ (75).JPG</code> is named for a sculpture project but actually
+      pictures the author as a child with a monkey on his head — so a name-based label wrongly counts it
+      <em>irrelevant</em> to <code>with an animal</code> and penalises a retrieval that was in fact
+      correct. The gold set therefore contains both false negatives and false positives, so on queries
+      like this one it can <em>understate</em> true performance, not only inflate it. Read the
+      <code>with an animal</code> result in that light.
+    </div>
+    <div class="callout">
+      <b>How to read the evaluation.</b> Because relevance was inferred from names and metadata,
+      the precision@k figures are best treated as a <em>directional</em> comparison of the three
+      routes — the ordering hybrid &gt; caption &gt; visual is robust — rather than as exact
+      accuracy scores. The faithful correction is a hand-verified gold set that labels each image
+      by eye; that is the clear next step, and it would most likely <em>raise</em> the measured
+      scores where name-based labels currently misjudge visually-correct hits.
+    </div>
   </section>
 
   <section>
@@ -620,16 +648,26 @@
     <h2>Artifacts &amp; sources</h2>
     <p>Every figure on this page is regenerated from committed artifacts by
     <a href="figures/make_figures.py">figures/make_figures.py</a>. <b>L1/L2:</b>
-    <code>artifacts/captions.json</code> (clean 227), <code>artifacts/l2_route_comparison.json</code>
+    <code>artifacts/captions.json</code> (clean 227) — with the polluted 628/1462 scale-up run kept as
+    evidence in <code>artifacts/captions_1462_backup.json</code> — <code>artifacts/l2_route_comparison.json</code>
     (six-query CLIP-vs-caption results), <code>artifacts/clip_embeddings.pkl</code> (227×768) and
     <code>artifacts/text_embeddings.pkl</code> (227×384, MiniLM). <b>L3:</b>
     <code>artifacts/l3/alpha_sweep.json</code>, <code>artifacts/l3/evaluation_results.json</code>,
     <code>artifacts/l3/gold_queries.json</code> and <code>artifacts/l3/multimodal_degradation.json</code>.
+    A machine-readable inventory of every artifact is in <code>artifacts/MANIFEST.json</code>.
     Models across the three phases: <code>siglip-base-patch16-224</code> (L1 visual retrieval),
     <code>google/gemma-3-4b-it</code> (4-bit) for L2 captioning and L3 multimodal answering, and
     <code>sentence-transformers/all-MiniLM-L6-v2</code> for caption text. The full notebooks for all three
     levels are in <a href="notebooks/">notebooks/</a>; L2 iteration history is in
     <a href="docs/dev_log.md">docs/dev_log.md</a>.</p>
+  </section>
+
+  <section>
+    <h2>AI assistance</h2>
+    <p><b>AI tools.</b> This project was developed with the assistance of Anthropic's Claude
+    (models <b>Claude Opus 4.8</b> and <b>Claude Sonnet 4.6</b>), used for code scaffolding and
+    debugging, corpus analysis, figure generation, and drafting this documentation. The corpus,
+    the design decisions, and the final interpretation of the results are the author's own.</p>
   </section>
 
 </main>
@@ -638,7 +676,9 @@
   Seeing Machines — Levels 1–3 · Mateo Acevedo · CompSci for Designers 2, TH Nürnberg, Summer 2026.<br>
   L1 The Finder (SigLIP visual retrieval, 15-query atlas) → L2 The Companion (structured captioning +
   dual-route comparison) → L3 The Critic (α-weighted hybrid fusion + precision@k, best α = 0.3).<br>
-  Corpus: personal photo archive (227 images). See <code>corpus/README.md</code> for access &amp; consent.
+  Corpus: personal photo archive (227 images). See <code>corpus/README.md</code> for access &amp; consent.<br>
+  Repository: <a href="https://github.com/Mataconarte-art/seeing-machines">github.com/Mataconarte-art/seeing-machines</a>
+  · Developed with assistance from Claude (Opus 4.8 &amp; Sonnet 4.6).
 </div></footer>
 
 </body>

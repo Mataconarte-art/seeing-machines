@@ -1,0 +1,27 @@
+SEEING MACHINES — Levels 1–3
+Mateo Acevedo · MA Design for Digital Futures · CompSci for Designers 2 · TH Nürnberg · Summer 2026
+
+------------------------------------------------------------
+LINKS FOR THE REVIEWER
+------------------------------------------------------------
+
+GitHub repository (full project, all files):
+    https://github.com/Mataconarte-art/seeing-machines
+
+Live web write-up (GitHub Pages):
+    https://mataconarte-art.github.io/seeing-machines/
+
+------------------------------------------------------------
+WHAT'S IN THIS SUBMISSION ZIP
+------------------------------------------------------------
+
+  SeeingMachines_Documentation.pdf   The full L1–L3 write-up (rendered from index.html).
+  index.html                         The same write-up, offline; open in any browser.
+  figures/                           All charts/diagrams used in the write-up.
+  notebooks/                         L1/L2/L3 Jupyter notebooks (outputs stripped to keep this zip small).
+  artifacts/                         Captions, embeddings, gold queries, evaluation results, MANIFEST.
+  docs/dev_log.md                    Development log (the L2 caption saga, etc.).
+  README.md                          Project overview.
+
+NOTE: The full ~240-image photo corpus and the raw .CR2 files are NOT bundled here
+(size + privacy). They live in the GitHub repository linked above.

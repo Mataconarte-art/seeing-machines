@@ -7,6 +7,8 @@
 
 📄 **Full write-up:** open [`index.html`](index.html) (all three levels, also publishable via GitHub Pages) or export it to PDF.
 
+🔗 **Repository:** https://github.com/Mataconarte-art/seeing-machines · **Live site:** https://mataconarte-art.github.io/seeing-machines/
+
 ---
 
 ## Project arc
