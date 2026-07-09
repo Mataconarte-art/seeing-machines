@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seeing Machines · L1–L3 — Two Ways of Seeing, Then Both at Once</title>
+<style>
+  :root{
+    --ink:#1c1a17; --mute:#6b6459; --line:#e7e1d6; --bg:#faf7f2; --paper:#ffffff;
+    --clip:#c08457; --cap:#4a6b7c; --acc:#b5533b; --sig:#7c6a4a;
+    --maxw:820px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
+    line-height:1.62;font-size:18px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  header.hero{padding:72px 0 40px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;
+    letter-spacing:.18em;font-size:12px;color:var(--acc);font-weight:700}
+  h1{font-size:44px;line-height:1.08;margin:.35em 0 .2em;letter-spacing:-.01em}
+  .tagline{font-size:21px;color:var(--mute);font-style:italic;margin:0 0 26px}
+  .meta{font-family:ui-sans-serif,system-ui,sans-serif;font-size:13.5px;color:var(--mute);
+    display:flex;flex-wrap:wrap;gap:8px 22px;line-height:1.4}
+  .meta b{color:var(--ink);font-weight:600}
+  h2{font-family:ui-sans-serif,system-ui,sans-serif;font-size:14px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--acc);
+    margin:56px 0 6px;padding-top:14px}
+  h3{font-size:23px;margin:28px 0 6px;letter-spacing:-.01em}
+  p{margin:14px 0}
+  section{padding-bottom:8px}
+  figure{margin:30px 0;padding:0}
+  figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+  figcaption{font-family:ui-sans-serif,system-ui,sans-serif;font-size:13px;color:var(--mute);
+    margin-top:10px;line-height:1.5}
+  .lead{font-size:20px}
+  .callout{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--acc);
+    border-radius:8px;padding:16px 20px;margin:22px 0;font-size:16.5px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+  table{width:100%;border-collapse:collapse;margin:22px 0;font-size:14.5px;
+    font-family:ui-sans-serif,system-ui,sans-serif}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--mute);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+  td.num{font-variant-numeric:tabular-nums;text-align:right;color:var(--ink)}
+  td.best{font-weight:700;color:var(--acc)}
+  .pill{display:inline-block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:11.5px;
+    font-weight:600;padding:2px 9px;border-radius:20px;border:1px solid var(--line);color:var(--mute)}
+  .pill.clip{color:var(--clip);border-color:#e6cdb6}
+  .pill.cap{color:var(--cap);border-color:#c2d3da}
+  .pill.sig{color:var(--sig);border-color:#d8cdb6}
+  .pill.hyb{color:var(--acc);border-color:#e6c1b6}
+  .pill.win{color:#3f7d55;border-color:#bcd8c3}
+  .pill.warn{color:#a9772a;border-color:#e6d3ad}
+  .pill.fail{color:var(--acc);border-color:#e6c1b6}
+  ul.clean{list-style:none;padding:0;margin:16px 0}
+  ul.clean li{padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line)}
+  ul.clean li::before{content:"→";position:absolute;left:0;color:var(--acc);font-weight:700}
+  ol.steps{padding-left:22px;margin:16px 0}
+  ol.steps li{margin:8px 0}
+  code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.86em;
+    background:#f1ece3;padding:1px 6px;border-radius:5px}
+  footer{margin-top:64px;padding:30px 0 70px;border-top:1px solid var(--line);
+    font-family:ui-sans-serif,system-ui,sans-serif;font-size:13.5px;color:var(--mute)}
+  a{color:var(--cap);text-decoration:none;border-bottom:1px solid #c2d3da}
+  .kfacts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0}
+  @media(max-width:680px){.kfacts{grid-template-columns:repeat(2,1fr)}}
+  .kfact{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .kfact .n{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1}
+  .kfact .l{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;color:var(--mute);margin-top:7px;line-height:1.35}
+  /* phase banner */
+  .phase{margin:70px 0 4px;padding:24px 0 20px;border-top:2px solid var(--ink)}
+  .phase .pnum{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.18em;color:var(--acc)}
+  .phase .pt{font-size:33px;line-height:1.1;letter-spacing:-.015em;margin:.18em 0 .12em;color:var(--ink)}
+  .phase .psub{font-size:18px;color:var(--mute);font-style:italic;margin:0}
+  /* project arc / toc */
+  .arc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:6px 22px 10px;margin:30px 0}
+  .arc h4{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--mute);margin:16px 0 4px}
+  .arc ol{list-style:none;counter-reset:arc;padding:0;margin:8px 0 14px}
+  .arc ol li{counter-increment:arc;position:relative;padding:9px 0 9px 44px;border-bottom:1px solid var(--line);
+    font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px;line-height:1.45}
+  .arc ol li:last-child{border-bottom:none}
+  .arc ol li::before{content:"L" counter(arc);position:absolute;left:0;top:9px;
+    font-weight:700;font-size:12px;color:var(--paper);background:var(--acc);
+    width:28px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center}
+  .arc b{color:var(--ink)}
+  .quote{font-family:ui-sans-serif,system-ui,sans-serif;font-size:13.5px;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:10px 0;line-height:1.5}
+  .quote .who{color:var(--mute);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:5px}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Seeing Machines · Levels 1–3</div>
+  <h1>Two Ways of Seeing — Then Both at Once</h1>
+  <p class="tagline">Teaching a machine to retrieve a life from a photo archive: first through pixels, then through words, then by fusing the two.</p>
+  <div class="meta">
+    <span><b>Mateo Acevedo</b></span>
+    <span>MA Design for Digital Futures · TH Nürnberg</span>
+    <span>CompSci for Designers 2 · Summer 2026</span>
+    <span><b>Stages:</b> L1 The Finder → L2 The Companion → L3 The Critic</span>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+  <section>
+    <div class="kfacts">
+      <div class="kfact"><div class="n">227</div><div class="l">images in the coherent corpus (one recurring subject, ~25 years)</div></div>
+      <div class="kfact"><div class="n">3</div><div class="l">retrieval routes: visual, semantic, hybrid</div></div>
+      <div class="kfact"><div class="n">α = 0.3</div><div class="l">best fusion weight, swept on a gold set</div></div>
+      <div class="kfact"><div class="n">0.575</div><div class="l">hybrid precision@5 — beats either route alone</div></div>
+    </div>
+    <p class="lead">This project asks one question of a personal photo archive in three escalating ways.
+    <b>L1 — The Finder</b> builds a purely <em>visual</em> retrieval system and stress-tests exactly what
+    it can and cannot see. <b>L2 — The Companion</b> adds a second, <em>semantic</em> route — it teaches a
+    model to <em>describe</em> each photo, then retrieves over the descriptions — and puts the two ways of
+    seeing head-to-head. <b>L3 — The Critic</b> <em>fuses</em> them into a single weighted score, grounds
+    its answers in the retrieved images themselves, and measures all three routes against a gold set. The
+    arc: seeing, then reading, then judging.</p>
+
+    <div class="arc">
+      <h4>How to read this document</h4>
+      <ol>
+        <li><b>The Finder</b> — a SigLIP visual-similarity engine over the archive, with a 15-query
+          <em>retrieval atlas</em> that maps where contrastive vision-language embeddings succeed and fail.</li>
+        <li><b>The Companion</b> — structured-JSON captioning with Gemma, a second retrieval route over the
+          caption text, and a six-query comparison against the L1 visual baseline.</li>
+        <li><b>The Critic</b> — α-weighted <em>hybrid fusion</em> of the two routes, true multimodal
+          answering, and a precision@k evaluation across all three routes on an 8-query gold set.</li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- ============================ PHASE 1 ============================ -->
+  <div class="phase">
+    <div class="pnum">Phase 1 · Level 1</div>
+    <div class="pt">The Finder</div>
+    <p class="psub">What can a machine retrieve from a life when all it has are the pixels?</p>
+  </div>
+
+  <section>
+    <h2>Abstract</h2>
+    <p>L1 establishes the baseline. Every image in a personal archive of roughly <b>195 photographs
+    (1999–2023)</b> is embedded once with <b>SigLIP</b>, a contrastive vision-language model, into a shared
+    768-dimensional image–text space. A typed query is embedded into the same space and matched by cosine
+    similarity. The deliverable is not just the engine but a <b>retrieval atlas</b>: fifteen queries, each
+    with its top-5 results, similarity scores, and a mechanistic reading of <em>why</em> the model returned
+    what it did. The atlas is what turns a demo into a diagnosis — it shows that the model reliably encodes
+    concrete scenes and activities, and reliably fails at identity, age, counting and relation. Those
+    failures are the specification for L2.</p>
+  </section>
+
+  <section>
+    <h2>Corpus</h2>
+    <h3>A visual autobiography, chosen because I know every frame</h3>
+    <p>The corpus is ~195 personal photographs spanning 1999–2023 — childhood to the present: candid and
+    posed portraits, outdoor activities, travel (an Amazon reserve, San Francisco, Houston), a sculpture
+    project series, restaurant visits, events, and costume/performance photos. It was curated down from a
+    larger collection by removing standalone artwork and illustrations, to keep it <em>exclusively
+    photographs</em>. The reason is methodological: because I know who is in every image, where and when it
+    was taken, and what was happening, a machine's <b>mis-seeing is immediately obvious</b> in a way it never
+    is with unfamiliar stock images.</p>
+    <div class="callout">
+      That homogeneity is also the corpus's defining technical property: almost every image is
+      "a personal photograph of/with the same person", so all embeddings cluster tightly in one region of
+      the space. Scores compress into a <b>0.03–0.13</b> band (versus 0.25+ on diverse benchmarks), which
+      means small score differences carry real signal — and threshold-based filtering has to be calibrated
+      carefully.
+    </div>
+  </section>
+
+  <section>
+    <h2>Pipeline</h2>
+    <h3>One model, embedded once, retrieved on CPU</h3>
+    <p><b>Model.</b> SigLIP (<code>siglip-base-patch16-224</code>) — a contrastive model that projects images
+    and text into one shared 768-d space.</p>
+    <p><b>Embedding.</b> Each image is resized to 224×224, passed through SigLIP's vision transformer, and
+    projected into the shared space. Every vector is L2-normalised, so a dot product between any two equals
+    their cosine similarity. Embeddings are computed once on a T4 GPU (batch size 16) and cached to a pickle
+    file; all subsequent retrieval runs on CPU.</p>
+    <p><b>Retrieval.</b> A text query is encoded through SigLIP's text tower into the same space, cosine
+    similarity is computed against every cached image embedding, results are ranked, and an adjustable
+    similarity <b>threshold</b> (default 0.08) filters weak matches. A Gradio interface wraps it with a text
+    box, a top-k slider, and a threshold slider.</p>
+  </section>
+
+  <section>
+    <h2>The retrieval atlas — 15 queries</h2>
+    <p>The atlas is the heart of L1: fifteen queries across four categories, each with its top-5 results,
+    similarity scores, and a mechanistic explanation. Grouped by outcome below.</p>
+
+    <h3><span class="pill win">Successes</span></h3>
+    <table>
+      <thead><tr><th>Query</th><th class="num">top score</th><th>Why it works</th></tr></thead>
+      <tbody>
+        <tr><td><code>a kid fishing</code></td><td class="num">0.1265</td><td>Highest score in the atlas. Concrete and compositional — child + rod + water has a strong visual signature. A large score cliff to rank 2 (→0.0889) confirms one confident match.</td></tr>
+        <tr><td><code>riding a bicycle</code></td><td class="num">0.0998</td><td>Most dramatic cliff (54% drop to rank 2). Exactly one image shows a bicycle; SigLIP found it confidently.</td></tr>
+        <tr><td><code>a teenager</code></td><td class="num">0.1064</td><td>Three of five results from Sept 2013 (age ~16). Casual clothing and posture match SigLIP's learned "teenager" representation.</td></tr>
+        <tr><td><code>wearing a costume</code></td><td class="num">0.1058</td><td>Halloween image at rank 3; sculpture-project images also surface — non-standard clothing reads as "costume." Correct, for the wrong reason.</td></tr>
+        <tr><td><code>a formal event or graduation</code></td><td class="num">0.0961</td><td>Retrieves a formal celebration and a graduation. Despite filenames suggesting otherwise, the visual content is right.</td></tr>
+        <tr><td><code>by the water or at a beach</code></td><td class="num">0.0942</td><td>San Francisco beach confirmed at rank 3, good date diversity. Water/beach has concrete signatures (blue tones, sand, open sky).</td></tr>
+        <tr><td><code>outdoors in nature</code></td><td class="num">0.0909</td><td>SFO April 2019 images dominate (4 of 5). Correct outdoor/nature sense, but reveals near-duplicate saturation.</td></tr>
+        <tr><td><code>a painting or drawing</code></td><td class="num">0.0843</td><td>In a photo-only corpus, SigLIP still detects paintings/drawings visible <em>within</em> photos — local feature encoding at work.</td></tr>
+      </tbody>
+    </table>
+
+    <h3><span class="pill warn">Partial successes</span></h3>
+    <table>
+      <thead><tr><th>Query</th><th class="num">top score</th><th>What went wrong</th></tr></thead>
+      <tbody>
+        <tr><td><code>a young adult</code></td><td class="num">0.0990</td><td>Heavy overlap with "teenager" (same 2013 images); score gap only 0.007. SigLIP cannot sharply separate adjacent age ranges.</td></tr>
+        <tr><td><code>a formal portrait</code></td><td class="num">0.0907</td><td>Sculpture-project images rank top for clean composition, not formal attire. "Mateo de gala" (literally "formal Mateo") never appears — SigLIP sees pixels, not metadata.</td></tr>
+        <tr><td><code>a child</code></td><td class="num">0.0868</td><td>The chronologically correct childhood photo lands only at rank 5; sushi-restaurant images (age ~20) intrude because the scene composition reads as "child context." SigLIP encodes scenes, not facial age.</td></tr>
+        <tr><td><code>at a party or celebration</code></td><td class="num">0.0746</td><td>20th birthday correct at rank 1, but low scores overall — "party" is an abstract social concept with variable visual form.</td></tr>
+        <tr><td><code>a dog or cat</code></td><td class="num">0.0672</td><td>Rank 1 is a hyena costume (Lion King musical) — animal-like features trigger the match. Real cat photos appear at ranks 2–4.</td></tr>
+        <tr><td><code>food or restaurant</code></td><td class="num">0.0572</td><td>Saltgrass Houston correct at rank 3, but very low scores. Close-framed sushi images don't read as "restaurant."</td></tr>
+      </tbody>
+    </table>
+
+    <h3><span class="pill fail">Failure</span></h3>
+    <table>
+      <thead><tr><th>Query</th><th class="num">top score</th><th>Why it fails</th></tr></thead>
+      <tbody>
+        <tr><td><code>two people together</code></td><td class="num">0.0598</td><td>Lowest top score in the atlas. Contrastive models encode a bag of features, not structured relations — "two" requires binding a quantity to objects, a known CLIP/SigLIP limitation (Winoground).</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Score distribution &amp; threshold</h2>
+    <p>Because the corpus is homogeneous, top-k always returns <em>something</em> — so the real signal is
+    score <b>magnitude</b>, not rank position. Comparing the full-corpus score distribution for strong vs.
+    weak queries makes the difference visible:</p>
+    <table>
+      <thead><tr><th>Query type</th><th class="num">mean</th><th class="num">std</th><th class="num">min</th><th class="num">max</th></tr></thead>
+      <tbody>
+        <tr><td>Strong — <code>a kid fishing</code></td><td class="num">0.0075</td><td class="num">0.0325</td><td class="num">−0.0658</td><td class="num">0.1265</td></tr>
+        <tr><td>Mid — <code>a formal event or graduation</code></td><td class="num">0.0145</td><td class="num">0.0294</td><td class="num">−0.0330</td><td class="num">0.0961</td></tr>
+        <tr><td>Weak — <code>two people together</code></td><td class="num">0.0187</td><td class="num">0.0182</td><td class="num">−0.0279</td><td class="num">0.0598</td></tr>
+      </tbody>
+    </table>
+    <p>Strong queries show a high max with a low mean and wide spread — one clear match against an otherwise
+    irrelevant corpus. Weak queries show a high mean relative to their max and a narrow spread — no clear
+    match, just a flat field of vaguely relevant scenes.</p>
+    <div class="callout">
+      <b>Proposed threshold: 0.08.</b> Across all fifteen queries, scores above 0.08 correspond to genuine
+      or plausible matches; scores below 0.06 are consistently noise. The 0.06–0.08 band is ambiguous — and
+      is exactly the band L2's caption re-ranking is meant to disambiguate.
+    </div>
+  </section>
+
+  <section>
+    <h2>What L1 established</h2>
+    <ul class="clean">
+      <li><b>Score thresholds matter more than rank.</b> With a homogeneous corpus, top-k always returns
+      something; the signal is score magnitude, not position.</li>
+      <li><b>Photo bursts saturate results.</b> The SFO series (12 photos) and the sculpture project (18)
+      dominate multiple queries because near-duplicates cluster in embedding space — a diversity mechanism
+      (e.g. maximal marginal relevance) would help.</li>
+      <li><b>SigLIP encodes scenes, not identities or ages.</b> It cannot track one person aging across
+      photos; "a child" and "a teenager" retrieve on composition, clothing and image quality, not facial
+      age. This is the single biggest opening for a caption layer.</li>
+      <li><b>Concrete beats abstract.</b> "A kid fishing" (0.1265) and "riding a bicycle" (0.0998) beat
+      "at a party" (0.0746) and "two people together" (0.0598). Distinctive activities embed well; formless
+      social concepts embed poorly.</li>
+      <li><b>Counting and spatial relations fail.</b> "Two people together" is the weakest query — the model
+      encodes an unstructured bag of features, not relational structure.</li>
+      <li><b>SigLIP sees pixels, not metadata.</b> Descriptive filenames ("Mateo de gala", "Choo Choo
+      Sushi") are never retrieved by matching queries unless the visual features actually match.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Limitations → the brief for L2</h2>
+    <p>Each L1 limitation is a direct requirement handed to The Companion:</p>
+    <ul class="clean">
+      <li><b>No identity or temporal awareness</b> → L2 asks a VLM to explicitly estimate a
+      <code>subject_age_band</code> and name companions in a structured caption.</li>
+      <li><b>Compressed score range / hard thresholding</b> → L2 retrieves over caption <em>text</em>
+      embeddings, whose similarities spread across a much wider, more legible range.</li>
+      <li><b>No compositional / relational reasoning</b> → L2 tests whether describing a scene in words
+      recovers relations the contrastive embedding drops (spoiler: counting still fails).</li>
+      <li><b>Near-duplicate saturation and scene-over-semantics bias</b> → motivate a second, independent
+      route so the two can be compared, and eventually fused, in L3.</li>
+    </ul>
+  </section>
+
+
+  <!-- ============================ PHASE 2 ============================ -->
+  <div class="phase">
+    <div class="pnum">Phase 2 · Level 2</div>
+    <div class="pt">The Companion</div>
+    <p class="psub">If the machine writes down what it sees, can it find the photo you actually meant?</p>
+  </div>
+
+  <section>
+    <div class="kfacts">
+      <div class="kfact"><div class="n">227</div><div class="l">images in the coherent corpus</div></div>
+      <div class="kfact"><div class="n">227/227</div><div class="l">captions parsed as valid JSON</div></div>
+      <div class="kfact"><div class="n">2</div><div class="l">retrieval routes compared</div></div>
+      <div class="kfact"><div class="n">768 / 384</div><div class="l">visual vs. text embedding dims</div></div>
+    </div>
+    <p class="lead">L2 takes L1's core failure — SigLIP sees scenes, not meaning — and answers it directly.
+    It asks a deceptively simple question of the same archive: <em>when you type “a kid fishing”, what
+    should the machine look at — the picture, or a description of the picture?</em> To answer it I built two
+    independent retrieval routes over the same 227 images and put them head-to-head. The routes disagree,
+    and the way they disagree is the whole point.</p>
+  </section>
+
+  <section>
+    <h2>Abstract</h2>
+    <p>Every image in the corpus is indexed twice. The <span class="pill clip">visual route</span>
+    embeds raw pixels with a CLIP-family image encoder (227×768) — the L1 approach, carried forward as a
+    baseline. The <span class="pill cap">semantic route</span>
+    first asks a vision-language model (Gemma-3-4b-it) to <em>write</em> a structured caption for each
+    photo, then embeds that text with a sentence encoder (MiniLM, 227×384). A query is run through both,
+    and the top matches are compared. The finding: on abstract, human queries about age, occasion and
+    activity, the caption route returns far stronger and more meaningful matches than raw CLIP — but the
+    two routes surface genuinely <em>different</em> images, so neither is sufficient alone. That tension is
+    exactly what motivates the hybrid fusion built in L3.</p>
+  </section>
+
+  <section>
+    <h2>Motivation &amp; corpus</h2>
+    <h3>Why a personal archive, and why 227</h3>
+    <p>The corpus is my own life in photographs — a stress test for retrieval, because the queries a person
+    actually asks (“teenager”, “a formal event”, “travelling”) are semantic and fuzzy, not object labels.
+    After diagnosing cache drift in an earlier pass, the corpus was deliberately fixed at the
+    <b>227 images</b> for which captions, CLIP vectors and text vectors all agree on an identical filename
+    set with zero stubs. 227 is on-spec (≤300) and, crucially, <em>coherent</em>: every downstream number
+    describes the same photographs. (The slightly larger figure than L1's working set reflects re-including
+    images once the caches were reconciled.)</p>
+
+    <figure>
+      <img src="figures/age_distribution.png" alt="Bar chart of age bands across the 227 images">
+      <figcaption>The archive skews young-adult and teenage — the model derives an
+      <code>subject_age_band</code> for every image, giving age its own clean retrieval signal
+      (age is read from filename years, so unlike the semantic fields it is not self-referential).</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Approach</h2>
+    <h3>One archive, two encoders</h3>
+    <p>The pipeline forks immediately after the source and only rejoins at the comparison step, so each
+    route can be judged on its own terms. In L3 the two branches rejoin a second time — this diagram already
+    shows that hybrid stage on the right.</p>
+    <figure>
+      <img src="figures/pipeline.svg" alt="L1–L3 pipeline diagram: visual route, semantic route, hybrid fusion">
+      <figcaption>The visual route (SigLIP/CLIP, top, L1) and the semantic route (Gemma caption → MiniLM,
+      bottom, L2) index the same 227 images independently; six probe queries drive the L2 comparison. On the
+      right, L3 fuses both similarity signals at the score level (best α = 0.3) and evaluates on an 8-query
+      gold set.</figcaption>
+    </figure>
+    <p>Captions are not free text — Gemma is prompted for a <b>structured JSON schema</b>
+    (<code>one_line</code>, <code>subject_age_band</code>, <code>subject_activity</code>,
+    <code>companions</code>, <code>setting</code>, <code>occasion</code>, <code>objects</code>,
+    <code>searchable_text</code>) and decoded <b>deterministically</b> (<code>do_sample=False</code>) so
+    the run is reproducible. The <code>searchable_text</code> field is what the semantic route actually
+    embeds.</p>
+  </section>
+
+  <section>
+    <h2>Development — the caption saga</h2>
+    <p>Getting to a clean 227 was not linear, and the dev log keeps the scars. Early runs captioned
+    <em>zero</em> images (a silent parse bug: 0/0). The clean run on 2026-07-06 finally hit
+    <b>227/227</b> valid JSON. A later attempt to scale to the full 1462-image dump collapsed to
+    <b>628/1462</b> usable — roughly 43% of that run parsed. That polluted run is kept as
+    <code>captions_1462_backup.json</code> in the L2 history, not deleted: it is the evidence behind the
+    decision to stay on the coherent 227.</p>
+    <figure>
+      <img src="figures/caption_saga.png" alt="Parse yield: 227/227 clean vs 628/1462 polluted">
+      <figcaption>Structured-JSON captioning is reliable at 227 and brittle at 1462. The lesson carried
+      into L3: run one pipeline top-to-bottom on a set you trust rather than stitching bigger, dirtier runs.</figcaption>
+    </figure>
+    <div class="callout">
+      The model is also honestly reticent: it labels <code>occasion</code> as <b>“none”</b> for 133 of 227
+      images rather than inventing a celebration. Good for precision, but it means the <code>occasion</code>
+      signal is sparse — a real constraint on any occasion-based query.
+    </div>
+    <figure>
+      <img src="figures/occasion_distribution.png" alt="Occasion field distribution across 227 images">
+      <figcaption>Distribution of the <code>occasion</code> field. “none” dominates (133/227); “travel”,
+      “other” and “everyday” carry most of the remaining signal; “party”, “graduation” and “performance”
+      are near-singletons.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Findings</h2>
+    <h3>The routes live on different scales — and see different things</h3>
+    <p>Across all six probe queries the caption route returns dramatically higher cosine similarities than
+    raw CLIP. This is partly a scale artefact (the two embedding spaces are not directly comparable), but
+    the <em>ranking behaviour</em> is the real signal: the routes frequently disagree on which image is
+    the best match.</p>
+    <figure>
+      <img src="figures/route_comparison.png" alt="Top-1 similarity per query, CLIP vs caption">
+      <figcaption>Top-1 cosine similarity per query. Caption similarities (0.28–0.70) dwarf CLIP’s
+      (0.06–0.13). Read the numbers as “how confidently does this route commit to its top pick”, not as a
+      direct A-vs-B score.</figcaption>
+    </figure>
+
+    <p>Where the routes <em>agree</em>, we can trust the hit. “A kid fishing” is the clean case — both
+    routes put the same 2006 photo first, and it is the same image L1's atlas scored highest of all:</p>
+    <table>
+      <thead><tr><th>Query “a kid fishing”</th><th>route</th><th class="num">top-1 score</th></tr></thead>
+      <tbody>
+        <tr><td><code>2006_05_09_ (2).jpg</code></td><td><span class="pill clip">CLIP</span></td><td class="num">0.127</td></tr>
+        <tr><td><code>2006_05_09_ (2).jpg</code></td><td><span class="pill cap">caption</span></td><td class="num">0.697</td></tr>
+      </tbody>
+    </table>
+
+    <p>Where they <em>disagree</em>, the caption route is usually the better human match. For “a formal
+    event or graduation”, CLIP’s top pick is a studio/sculpture-project image (exactly the "correct for the
+    wrong reason" behaviour L1 documented); the caption route correctly surfaces the actual
+    gown-and-ceremony photographs:</p>
+    <table>
+      <thead><tr><th>Query “a formal event or graduation”</th><th>route</th><th class="num">score</th></tr></thead>
+      <tbody>
+        <tr><td><code>2016_11_Project Sculture_2_ (28).JPG</code></td><td><span class="pill clip">CLIP</span></td><td class="num">0.096</td></tr>
+        <tr><td><code>DSC05207.JPG</code> · <code>DSC05202.JPG</code> · <code>DSC05209.JPG</code></td><td><span class="pill cap">caption</span></td><td class="num">0.65–0.61</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b>The headline:</b> neither route wins outright. Caption is the stronger single route on semantic
+      queries, but CLIP occasionally anchors on visual cues the caption dropped. Two routes that are each
+      right some of the time, about different images, is precisely the setup where a <b>weighted fusion</b>
+      can beat both — the hypothesis L3 goes on to test and confirm (best at α ≈ 0.3).
+    </div>
+
+    <div class="callout">
+      <b>The one thing both routes still fail:</b> counting. “Two people together” — L1's weakest query —
+      is not rescued by captions either. Describing a scene in words does not reliably recover
+      <em>quantity</em>, confirming that this is a limitation of how meaning is represented, not merely of
+      the pixel encoder.
+    </div>
+  </section>
+
+  <section>
+    <h2>Reflection</h2>
+    <ul class="clean">
+      <li><b>Writing is a form of seeing.</b> Turning an image into a structured caption before embedding
+      it changes what the machine can find — it trades pixel fidelity for human-legible semantics, and for
+      these queries that trade pays off.</li>
+      <li><b>Coherence beats size.</b> A trustworthy 227 taught me more than a noisy 1462. The polluted run
+      is kept as evidence, not swept away.</li>
+      <li><b>Disagreement is information.</b> The gap between the routes isn’t noise to be averaged away —
+      it’s the map of where each way of seeing is blind, and the reason fusion is worth building.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>L2 limitations &amp; the mis-seeing dossier</h2>
+    <ul class="clean">
+      <li><b>Scores aren’t directly comparable.</b> CLIP and caption embeddings live in different spaces
+      with different scales; the L2 comparison is qualitative (ranking + agreement). Quantitative
+      precision@k arrives in L3.</li>
+      <li><b>Sparse occasion signal.</b> 133/227 images have <code>occasion = "none"</code>, so
+      occasion-driven queries lean heavily on a small labelled subset.</li>
+      <li><b>Caption self-reference.</b> Semantic fields are model-generated, so any evaluation that
+      derives relevance labels from those same fields will structurally favour the caption (and hybrid)
+      route — flagged here, and carried as a caveat into L3's numbers.</li>
+      <li><b>The mis-seeing dossier.</b> Captions hallucinate too: a ~age-2 photo was tagged
+      <em>teenager</em> while its own <code>one_line</code> said "a young boy"; age bands compress
+      (young adult 120 / teenager 78 / child 23 / adult 6); off-vocabulary companion labels drift; and a
+      stingray image was retrieved for "fishing." Documented with the same rigour as the L1 atlas.</li>
+    </ul>
+  </section>
+
+
+  <!-- ============================ PHASE 3 ============================ -->
+  <div class="phase">
+    <div class="pnum">Phase 3 · Level 3</div>
+    <div class="pt">The Critic</div>
+    <p class="psub">Two ways of seeing were each right some of the time. Can fusing them beat either alone?</p>
+  </div>
+
+  <section>
+    <div class="kfacts">
+      <div class="kfact"><div class="n">α = 0.3</div><div class="l">best fusion weight from the sweep</div></div>
+      <div class="kfact"><div class="n">0.875</div><div class="l">hybrid precision@1 (vs 0.500 visual, 0.625 caption)</div></div>
+      <div class="kfact"><div class="n">0.575</div><div class="l">hybrid precision@5 (vs 0.225 visual, 0.500 caption)</div></div>
+      <div class="kfact"><div class="n">8</div><div class="l">gold queries · 3 routes scored</div></div>
+    </div>
+    <p class="lead">L3 answers the question L2 left open. It fuses the visual and semantic similarities into
+    a single weighted score, sweeps the weight to find the best blend, and — for the first time in the
+    project — reports a hard number: <b>precision@k</b> against a gold set. It also closes the loop on
+    grounding, passing the retrieved <em>images themselves</em> back into Gemma at answer time and
+    documenting how that degrades as more images are added.</p>
+  </section>
+
+  <section>
+    <h2>Approach — fuse at the score level, not the vector level</h2>
+    <p>The two routes live in <em>different spaces</em>: SigLIP produces 768-d image vectors, MiniLM
+    produces 384-d caption-text vectors, and each is queried by a different encoder. You cannot concatenate
+    or average the vectors. So fusion happens one step later, on the <b>similarity scores</b>:</p>
+    <div class="callout">
+      For each query, min-max normalise the visual similarity vector and the caption similarity vector
+      independently over the corpus (each becomes [0, 1]), then combine:<br>
+      <code>hybrid = α · sim_visual + (1 − α) · sim_caption</code>.<br>
+      This is valid across different embedding models because you are combining two comparable [0, 1]
+      rankings, not raw vectors from incompatible spaces.
+    </div>
+    <p>The weight <code>α</code> is not guessed — it is swept from 0 (pure caption) to 1 (pure visual) and
+    scored on the gold set.</p>
+    <figure>
+      <img src="figures/alpha_sweep.png" alt="precision@5 as a function of the fusion weight alpha">
+      <figcaption>The α-sweep. Precision@5 peaks at <b>α = 0.3</b> (0.575) — a blend that leans on the
+      caption route but keeps a meaningful visual contribution. Pure visual (α = 1) collapses to 0.225;
+      pure caption (α = 0) sits at 0.500. The fused middle beats both ends.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Evaluation — precision@k across three routes</h2>
+    <p>The gold set is 8 queries with a list of relevant filenames each (auto-derived from the caption
+    fields and filename dates, then eyeballed — <em>not</em> exhaustively hand-verified; see the honesty
+    note below). Every route is scored at k = 1, 3, 5.</p>
+    <figure>
+      <img src="figures/precision_at_k.png" alt="precision@1, @3, @5 for visual, caption, and hybrid routes">
+      <figcaption>Hybrid (α = 0.3) is best at every cut-off. The gap is widest at the top of the list —
+      precision@1 jumps from 0.500 (visual) and 0.625 (caption) to <b>0.875</b> hybrid — which is what
+      matters most for a retrieval interface where the first result carries the day.</figcaption>
+    </figure>
+    <table>
+      <thead><tr><th>Route</th><th class="num">P@1</th><th class="num">P@3</th><th class="num">P@5</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill clip">visual only</span></td><td class="num">0.500</td><td class="num">0.250</td><td class="num">0.225</td></tr>
+        <tr><td><span class="pill cap">caption only</span></td><td class="num">0.625</td><td class="num">0.500</td><td class="num">0.500</td></tr>
+        <tr><td><span class="pill hyb">hybrid (α=0.3)</span></td><td class="num best">0.875</td><td class="num best">0.625</td><td class="num best">0.575</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Where hybrid helps — and where nothing does</h3>
+    <p>The per-query breakdown is more honest than the averages. Fusion clearly rescues some queries, ties
+    on others, and leaves a hard core untouched.</p>
+    <figure>
+      <img src="figures/per_query_precision.png" alt="per-query precision@5 for the three routes">
+      <figcaption>Per-query precision@5. Hybrid lifts <code>a young adult</code> (0.0 visual / 0.4 caption
+      → <b>0.8</b>) and <code>a teenager</code> (0.6 / 0.6 → <b>0.8</b>) by combining both signals. It ties
+      the better single route on <code>travelling</code> (1.0) and <code>a formal event</code> (0.8). And it
+      cannot save <code>a child</code>, <code>a performance or costume</code>, or <code>with an animal</code>
+      — the queries where both underlying routes are already weak.</figcaption>
+    </figure>
+    <div class="callout">
+      <b>The honest headline:</b> fusion is not magic. It helps most where the two routes each hold
+      <em>part</em> of the answer (age queries), ties where one route is already strong (travel), and fails
+      where both routes fail (rare or fine-grained concepts). A weighted average can combine two partial
+      signals; it cannot invent a signal that isn't there.
+    </div>
+  </section>
+
+  <section>
+    <h2>Multimodal grounding — and its degradation</h2>
+    <p>The final L3 addition drops the caption intermediary at answer time: the retrieved <em>images
+    themselves</em> (capped at 3–4) are passed into Gemma's context, and the model answers from the pixels.
+    This works well for a single image and <b>degrades predictably</b> as the image count rises — a genuine,
+    documented finding, not a bug to hide.</p>
+    <table>
+      <thead><tr><th>Prompt: “What is the setting of these photos?”</th><th>Gemma's answer</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill hyb">1 image</span></td><td>“A person indoors, with purple walls and two large, bright purple geometric shapes (likely lights or panels) positioned behind and around them.” — specific, committed.</td></tr>
+        <tr><td><span class="pill warn">4 images</span></td><td>Enumerates each image separately, then concedes: “I can't determine a single overarching setting for all the photos. They appear to be taken in a variety of locations.”</td></tr>
+      </tbody>
+    </table>
+    <p>The same pattern holds for “How old does the person look?” — one image yields a confident band
+    (“late teens or early twenties”); four images yield four hedged, per-image estimates and an explicit
+    caveat that these are “just estimations.” <b>More visual context buys breadth but costs the model's
+    ability to commit to a single synthesised answer.</b> For an archive assistant, that argues for tight
+    top-k grounding (1–2 images) when a decisive answer is wanted, and wider grounding only when the user
+    explicitly asks to compare.</p>
+  </section>
+
+  <section>
+    <h2>L3 limitations &amp; honesty notes</h2>
+    <ul class="clean">
+      <li><b>The gold set is auto-derived, not hand-verified.</b> Relevance lists were assembled from the
+      caption fields and filename dates and then spot-checked by eye. Every <code>gold_queries.json</code>
+      entry carries the note “auto-derived from caption fields; not hand-verified.” This inflates the
+      caption and hybrid routes relative to visual, because their labels come from the same caption text
+      they retrieve on.</li>
+      <li><b>Small sample.</b> Eight queries and precision@{1,3,5} — enough to show the fusion ordering
+      (hybrid &gt; caption &gt; visual) robustly, not enough for narrow confidence intervals. The result is
+      directional, and stated as such.</li>
+      <li><b>A single α for all queries.</b> The sweep optimises one global weight; per-query or
+      learned weighting would almost certainly do better, and is the obvious next step.</li>
+      <li><b>Multimodal degradation is qualitative.</b> The 1-vs-4-image comparison is read from the
+      answers, not scored on a metric — it demonstrates the direction of the effect, not its magnitude.</li>
+    </ul>
+  </section>
+
+
+  <!-- ============================ CLOSE ============================ -->
+  <section>
+    <h2>The arc, in one line each</h2>
+    <ul class="clean">
+      <li><b>L1 · The Finder</b> — a machine that sees pixels retrieves concrete scenes well and fails at
+      identity, age, counting and relation. The atlas is the map of those failures.</li>
+      <li><b>L2 · The Companion</b> — describing each photo in words builds a second, semantic route that
+      wins on human queries; but the two routes see <em>different</em> images, so neither is enough alone.</li>
+      <li><b>L3 · The Critic</b> — fusing the two similarity signals (best α = 0.3) beats either route at
+      every cut-off (P@1 0.875), while grounding in the images themselves shows that decisiveness fades as
+      visual context grows.</li>
+    </ul>
+    <div class="callout">
+      Across all three levels the through-line holds: <b>a personal archive is the honest test</b>, because
+      every mis-seeing is legible to the one person who knows every frame — and <b>each way of seeing is
+      blind somewhere</b>, which is exactly why combining them, carefully and measurably, is worth the work.
+    </div>
+  </section>
+
+  <section>
+    <h2>Artifacts &amp; sources</h2>
+    <p>Every figure on this page is regenerated from committed artifacts by
+    <a href="figures/make_figures.py">figures/make_figures.py</a>. <b>L1/L2:</b>
+    <code>artifacts/captions.json</code> (clean 227), <code>artifacts/l2_route_comparison.json</code>
+    (six-query CLIP-vs-caption results), <code>artifacts/clip_embeddings.pkl</code> (227×768) and
+    <code>artifacts/text_embeddings.pkl</code> (227×384, MiniLM). <b>L3:</b>
+    <code>artifacts/l3/alpha_sweep.json</code>, <code>artifacts/l3/evaluation_results.json</code>,
+    <code>artifacts/l3/gold_queries.json</code> and <code>artifacts/l3/multimodal_degradation.json</code>.
+    Models across the three phases: <code>siglip-base-patch16-224</code> (L1 visual retrieval),
+    <code>google/gemma-3-4b-it</code> (4-bit) for L2 captioning and L3 multimodal answering, and
+    <code>sentence-transformers/all-MiniLM-L6-v2</code> for caption text. The full notebooks for all three
+    levels are in <a href="notebooks/">notebooks/</a>; L2 iteration history is in
+    <a href="docs/dev_log.md">docs/dev_log.md</a>.</p>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  Seeing Machines — Levels 1–3 · Mateo Acevedo · CompSci for Designers 2, TH Nürnberg, Summer 2026.<br>
+  L1 The Finder (SigLIP visual retrieval, 15-query atlas) → L2 The Companion (structured captioning +
+  dual-route comparison) → L3 The Critic (α-weighted hybrid fusion + precision@k, best α = 0.3).<br>
+  Corpus: personal photo archive (227 images). See <code>corpus/README.md</code> for access &amp; consent.
+</div></footer>
+
+</body>
+</html>

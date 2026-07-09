@@ -1,0 +1,50 @@
+{
+  "k": 5,
+  "sweep": [
+    {
+      "alpha": 0.0,
+      "precision@5": 0.5
+    },
+    {
+      "alpha": 0.1,
+      "precision@5": 0.475
+    },
+    {
+      "alpha": 0.2,
+      "precision@5": 0.525
+    },
+    {
+      "alpha": 0.3,
+      "precision@5": 0.575
+    },
+    {
+      "alpha": 0.4,
+      "precision@5": 0.5
+    },
+    {
+      "alpha": 0.5,
+      "precision@5": 0.5
+    },
+    {
+      "alpha": 0.6,
+      "precision@5": 0.525
+    },
+    {
+      "alpha": 0.7,
+      "precision@5": 0.375
+    },
+    {
+      "alpha": 0.8,
+      "precision@5": 0.375
+    },
+    {
+      "alpha": 0.9,
+      "precision@5": 0.3
+    },
+    {
+      "alpha": 1.0,
+      "precision@5": 0.225
+    }
+  ],
+  "best_alpha": 0.3
+}

@@ -1,0 +1,39 @@
+{
+  "project": "Seeing Machines",
+  "stages": ["L1 The Finder", "L2 The Companion", "L3 The Critic"],
+  "corpus": {
+    "images": 227,
+    "note": "Coherent set: captions.json, clip_embeddings.pkl and text_embeddings.pkl share an identical filename list with 0 stubs. One recurring subject, ~25 years."
+  },
+  "models": {
+    "visual": "siglip-base-patch16-224 (also CLIP-family image embeddings)",
+    "captioning_and_multimodal": "google/gemma-3-4b-it (4-bit, deterministic decode)",
+    "caption_text": "sentence-transformers/all-MiniLM-L6-v2"
+  },
+  "shared_artifacts": {
+    "captions.json": "227 structured-JSON captions (schema: one_line, subject_age_band, subject_appearance, subject_activity, companions, setting, occasion, objects, searchable_text)",
+    "clip_embeddings.pkl": "227 x 768 visual embeddings",
+    "text_embeddings.pkl": "227 x 384 MiniLM caption-text embeddings"
+  },
+  "l2_artifacts": {
+    "l2_route_comparison.json": "6-query CLIP-vs-caption top-3 results (visual vs semantic route)"
+  },
+  "l3_artifacts": {
+    "l3/alpha_sweep.json": "precision@5 for alpha = 0.0..1.0; best_alpha = 0.3",
+    "l3/evaluation_results.json": "precision@{1,3,5} for visual_only / caption_only / hybrid, plus per-query",
+    "l3/gold_queries.json": "8 queries with relevant filenames (auto-derived from caption fields + filename dates; NOT hand-verified)",
+    "l3/multimodal_degradation.json": "1-image vs 4-image Gemma answers for 3 prompts"
+  },
+  "headline_results": {
+    "l3_best_alpha": 0.3,
+    "precision_at_5": {"visual_only": 0.225, "caption_only": 0.5, "hybrid": 0.575},
+    "precision_at_1": {"visual_only": 0.5, "caption_only": 0.625, "hybrid": 0.875}
+  },
+  "honesty_notes": [
+    "Gold set is auto-derived from caption fields and eyeballed, not exhaustively hand-verified; caption/hybrid scores are biased upward relative to visual because labels share the caption text.",
+    "8 queries and precision@{1,3,5}: directional, not tight confidence intervals.",
+    "A single global alpha is optimised; per-query weighting is left as future work.",
+    "The 1462-run backup (628/1462 usable) lives in the L2 history as evidence of scale brittleness; it is not required for any figure here."
+  ],
+  "notes": "captions.json / clip_embeddings.pkl / text_embeddings.pkl are byte-shared across L2 and L3 (same corpus). All figures are regenerated from these artifacts by figures/make_figures.py."
+}

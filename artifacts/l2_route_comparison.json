@@ -1,0 +1,26 @@
+{
+  "a child": {
+    "clip": [{"file": "Mateo Acevedo (1).JPG", "score": 0.0868}, {"file": "2016_11_Project Sculture_2_ (103).JPG", "score": 0.0827}, {"file": "2017_01_05_Choo Choo Suchi (3).JPG", "score": 0.0827}],
+    "caption": [{"file": "2006_11_29_.JPG", "score": 0.5564}, {"file": "2016_11_Project Sculture_2_ (123).JPG", "score": 0.5158}, {"file": "DSC01773.JPG", "score": 0.4433}]
+  },
+  "a teenager": {
+    "clip": [{"file": "2013_09_22 (1).JPG", "score": 0.1064}, {"file": "Mateo Acevedo (7).JPG", "score": 0.1033}, {"file": "2013_09_22 (4).JPG", "score": 0.102}],
+    "caption": [{"file": "IMG_2422.JPG", "score": 0.556}, {"file": "IMG_2243.JPG", "score": 0.5432}, {"file": "2012_01_27 (6).JPG", "score": 0.525}]
+  },
+  "two people together": {
+    "clip": [{"file": "2019_04_09_SFO (11).JPG", "score": 0.0598}, {"file": "IMG_0032.JPG", "score": 0.0582}, {"file": "DSC05305.JPG", "score": 0.0536}],
+    "caption": [{"file": "2016_11_Project Sculture_2_ (115).jpg", "score": 0.2812}, {"file": "DSC05239.JPG", "score": 0.2396}, {"file": "2016_11_Project Sculture_2_ (75).JPG", "score": 0.2365}]
+  },
+  "at a party or celebration": {
+    "clip": [{"file": "2017_07_0820 years (2).JPG", "score": 0.0746}, {"file": "2016_11_Project Sculture_2_ (29).JPG", "score": 0.0713}, {"file": "2016_11_Project Sculture_2_ (28).JPG", "score": 0.07}],
+    "caption": [{"file": "IMG_0683.JPG", "score": 0.5534}, {"file": "2016_11_Project Sculture_2_ (28).JPG", "score": 0.4987}, {"file": "DSCN0151.JPG", "score": 0.4983}]
+  },
+  "a kid fishing": {
+    "clip": [{"file": "2006_05_09_ (2).jpg", "score": 0.1265}, {"file": "1999_11_30.JPG", "score": 0.0889}, {"file": "2008_12_20_Reserva Paraiso Amazonas (2).JPG", "score": 0.084}],
+    "caption": [{"file": "2006_05_09_ (2).jpg", "score": 0.6965}, {"file": "2012_04_07.jpg", "score": 0.5292}, {"file": "IMG_1951.JPG", "score": 0.4326}]
+  },
+  "a formal event or graduation": {
+    "clip": [{"file": "2016_11_Project Sculture_2_ (28).JPG", "score": 0.0961}, {"file": "DSC05260.JPG", "score": 0.095}, {"file": "DSC05214.JPG", "score": 0.0927}],
+    "caption": [{"file": "DSC05207.JPG", "score": 0.6473}, {"file": "DSC05202.JPG", "score": 0.643}, {"file": "DSC05209.JPG", "score": 0.61}]
+  }
+}

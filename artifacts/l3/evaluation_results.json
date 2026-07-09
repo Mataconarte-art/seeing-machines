@@ -1,0 +1,63 @@
+{
+  "alpha": 0.3,
+  "n_queries": 8,
+  "precision_at_k": {
+    "visual_only": {
+      "p@1": 0.5,
+      "p@3": 0.25,
+      "p@5": 0.225
+    },
+    "caption_only": {
+      "p@1": 0.625,
+      "p@3": 0.5,
+      "p@5": 0.5
+    },
+    "hybrid": {
+      "p@1": 0.875,
+      "p@3": 0.625,
+      "p@5": 0.575
+    }
+  },
+  "per_query": {
+    "a child (under 12)": {
+      "visual_only": 0.0,
+      "caption_only": 0.2,
+      "hybrid": 0.2
+    },
+    "a teenager": {
+      "visual_only": 0.6,
+      "caption_only": 0.6,
+      "hybrid": 0.8
+    },
+    "a young adult": {
+      "visual_only": 0.0,
+      "caption_only": 0.4,
+      "hybrid": 0.8
+    },
+    "a formal event or graduation": {
+      "visual_only": 0.4,
+      "caption_only": 0.8,
+      "hybrid": 0.8
+    },
+    "travelling": {
+      "visual_only": 0.6,
+      "caption_only": 1.0,
+      "hybrid": 1.0
+    },
+    "a performance or costume": {
+      "visual_only": 0.0,
+      "caption_only": 0.2,
+      "hybrid": 0.2
+    },
+    "a kid fishing": {
+      "visual_only": 0.2,
+      "caption_only": 0.4,
+      "hybrid": 0.4
+    },
+    "with an animal": {
+      "visual_only": 0.0,
+      "caption_only": 0.4,
+      "hybrid": 0.4
+    }
+  }
+}
