@@ -149,7 +149,7 @@ seeing-machines/
 ├── notebooks/
 │   ├── L1_The_Finder.ipynb
 │   ├── L2_The_Companion.ipynb
-│   └── L3_The_Critic_FINAL.ipynb
+│   └── L3_The_Critic.ipynb
 ├── docs/
 │   └── dev_log.md                 # L1–L3 iteration history
 └── corpus/
